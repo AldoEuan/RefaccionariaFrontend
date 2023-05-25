@@ -1,0 +1,44 @@
+﻿@model IEnumerable<RefaccionariaFrontend.Models.SalesModel>
+
+@{
+    ViewBag.Title = "ObtenerVenta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Historial de Ventas</h2>
+ 
+<table class="table table-responsive align-middle table-hover">
+    <thead class="table-dark align-middle">
+        
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th>
+             
+            </th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+
+            <td>
+
+                @Html.ActionLink("Detalles", "Details", new { id = item.Id }, new { @class = "btn btn-info" })
+
+            </td>
+        </tr>
+    }
+
+</table>

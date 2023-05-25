@@ -1,0 +1,48 @@
+﻿@model IEnumerable<RefaccionariaFrontend.Models.DetalleVentaModel>
+
+@{
+    ViewBag.Title = "Confirmation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Ticket de Compra</h2>
+
+ 
+<table class="table table-hover">
+    <thead class="table-dark">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdVenta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdProducto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Precioventa)
+        </th>
+         
+    </tr>
+        </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdVenta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precioventa)
+            </td>
+            
+        </tr>
+    }
+
+</table>

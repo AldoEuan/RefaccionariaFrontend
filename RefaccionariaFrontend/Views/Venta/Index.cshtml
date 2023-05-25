@@ -1,0 +1,86 @@
+﻿@model IEnumerable<RefaccionariaFrontend.Models.ProductoModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="d-flex justify-content-between">
+    <div>
+
+        <h1 class="font-monospace"><strong>Refaccionaria Don Gilberto  </strong></h1>
+        <h2 class="font-monospace"><strong>Carrito de Compras</strong></h2>
+
+    </div>
+    <img class="w-50 border border-5" src="https://motometa.com.mx/media/landing/bike/refacciones/slider/kenda.png" />
+</div>
+<button type="button" class="btn btn-primary" data-toggle="ajax-model" data-target="#" data-url="@Url.Action("PartialViewSearch")">
+    <i class="bi bi-plus"></i>
+    Añadir al Carrito
+</button>
+
+
+<div class="py-3">
+
+    @if (Model != null)
+    {
+        <table class="w-100 m-auto my-3 table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var venta in Model)
+                {
+                    <tr class="my-3">
+                        <td>@venta.Nombre</td>
+                        <td>@venta.Preciocosto</td>
+                        <td>1</td>
+                        <td>@(venta.Preciocosto * 1)</td>
+                        <td>
+                            @using (Html.BeginForm("RemoveFromCart", "Venta", FormMethod.Post))
+                            {
+                                @Html.Hidden("id_producto", venta.Id)
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <span class="bi bi-dash"></span> Quitar del carrito
+                                </button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <h3 class="text-end">Total: $@ViewBag.TotalAmount</h3>
+
+        <a href="@Url.Action("Checkout", "Venta")" class="btn btn-primary">Realizar compra</a>
+    }
+    else
+    {
+        <p class="text-center">No hay productos en el carrito de compras.</p>
+
+        <i class="bi bi-cart3 d-flex justify-content-center" style="font-size: 124px; color: lightgrey"></i>
+    }
+
+</div>
+
+<div id="PlaceHolderHere"></div>
+
+
+@section scripts
+{
+    <script>
+        var PlaceHolderElement = $('#PlaceHolderHere');
+        $('button[data-toggle="ajax-model"]').click(function (evt) {
+            var url = $(this).data('url');
+            $.get(url).done(function (data) {
+                PlaceHolderElement.html(data);
+                PlaceHolderElement.find('.modal').modal('show');
+            })
+        })
+    </script>
+}

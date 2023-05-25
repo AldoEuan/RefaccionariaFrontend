@@ -1,0 +1,72 @@
+﻿@model IEnumerable<RefaccionariaFrontend.Models.ProductoModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="d-flex justify-content-between">
+<div>
+
+<h1 class="font-monospace"><strong>Refaccionaria Don Gilberto  </strong></h1>
+<h2 class="font-monospace"><strong>Inventario</strong></h2>
+   
+</div>
+<img class="w-25 border border-5" src="https://i.ytimg.com/vi/9-rO6TRDtPo/maxresdefault.jpg"/>
+</div>
+<hr />
+<p>
+    @Html.ActionLink("Agregar Nuevo Producto", "Create",null,new { @class = "btn btn-success" })
+</p>
+<table class="table table-responsive align-middle table-hover ">
+    <thead class="table-dark align-middle table-responsive">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Preciocosto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precioventa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Existencia)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Preciocosto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Precioventa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Existencia)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Borrar", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+</table>
